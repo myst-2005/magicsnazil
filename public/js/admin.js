@@ -5,6 +5,7 @@
 
 const ADMIN_STORAGE_KEY = 'magics_admin_auth';
 let allLeads = [];
+let sheetsConfig = { webAppUrl: '', isConnected: false, lastSyncedAt: null };
 let currentFilter = {
   search: '',
   stream: 'all',
@@ -23,6 +24,7 @@ function checkAuth() {
     loginSection.classList.add('hidden');
     dashboardSection.classList.remove('hidden');
     loadDashboardData();
+    loadSheetsConfig();
   } else {
     loginSection.classList.remove('hidden');
     dashboardSection.classList.add('hidden');
@@ -101,6 +103,121 @@ function handleLogout() {
   showAdminToast('Signed out successfully', 'info');
 }
 
+// Load Google Sheets Backend Configuration
+async function loadSheetsConfig() {
+  try {
+    const res = await fetch('/api/config/sheets');
+    if (res.ok) {
+      const data = await res.json();
+      sheetsConfig = data.config || {};
+      updateSheetsStatusUI();
+    }
+  } catch (err) {
+    console.warn('Could not load Google Sheets configuration:', err);
+  }
+}
+
+function updateSheetsStatusUI() {
+  const badge = document.getElementById('sheets-badge-status');
+  const info = document.getElementById('sheets-banner-info');
+  const input = document.getElementById('webAppUrlInput');
+
+  if (input && sheetsConfig.webAppUrl) {
+    input.value = sheetsConfig.webAppUrl;
+  }
+
+  if (!badge || !info) return;
+
+  if (sheetsConfig.webAppUrl && sheetsConfig.isConnected) {
+    badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+    badge.innerHTML = '🟢 Connected & Syncing';
+    const lastSync = sheetsConfig.lastSyncedAt ? new Date(sheetsConfig.lastSyncedAt).toLocaleTimeString('en-IN') : 'Just now';
+    info.innerHTML = `Live sync active with Google Drive. Last sync: <strong>${lastSync}</strong>`;
+  } else if (sheetsConfig.webAppUrl) {
+    badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40';
+    badge.innerHTML = '🟡 Configured (Testing...)';
+    info.innerHTML = `URL configured. Click 'Configure Sheet URL' to test connection.`;
+  } else {
+    badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-500/20 text-slate-300 border border-slate-500/40';
+    badge.innerHTML = '⚪ Local File Mode';
+    info.innerHTML = `Leads stored in local database. Connect a Google Sheet Web App URL to enable real-time cloud sync.`;
+  }
+}
+
+function openSheetsConfigModal() {
+  const modal = document.getElementById('sheets-config-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    if (sheetsConfig.webAppUrl) {
+      document.getElementById('webAppUrlInput').value = sheetsConfig.webAppUrl;
+    }
+  }
+}
+
+function closeSheetsConfigModal() {
+  const modal = document.getElementById('sheets-config-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+  }
+}
+
+async function handleSheetsConfigSubmit(e) {
+  e.preventDefault();
+  const urlInput = document.getElementById('webAppUrlInput');
+  const statusDiv = document.getElementById('sheets-modal-status');
+  const webAppUrl = urlInput ? urlInput.value.trim() : '';
+
+  statusDiv.classList.remove('hidden');
+  statusDiv.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-500 mr-2"></i> Testing connection to Google Sheet...';
+
+  try {
+    const res = await fetch('/api/config/sheets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ webAppUrl })
+    });
+
+    const data = await res.json();
+    sheetsConfig = data.config || {};
+    updateSheetsStatusUI();
+
+    if (data.success) {
+      statusDiv.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> ${data.message || 'Connection successful!'}`;
+      showAdminToast('Google Sheets backend connected successfully!', 'success');
+      setTimeout(() => {
+        closeSheetsConfigModal();
+        loadDashboardData();
+      }, 1200);
+    } else {
+      statusDiv.innerHTML = `<i class="fa-solid fa-circle-exclamation text-rose-600 mr-2"></i> ${data.message || 'Connection test failed.'}`;
+      showAdminToast('Google Sheets connection failed. Please check URL.', 'error');
+    }
+  } catch (err) {
+    statusDiv.innerHTML = `<i class="fa-solid fa-circle-exclamation text-rose-600 mr-2"></i> Connection error: ${err.message}`;
+    showAdminToast('Failed to update Google Sheets settings', 'error');
+  }
+}
+
+async function handleSheetsSync() {
+  showAdminToast('Syncing with Google Sheets...', 'info');
+  try {
+    const res = await fetch('/api/leads/sync', { method: 'POST' });
+    const data = await res.json();
+    if (data.success) {
+      allLeads = data.leads || allLeads;
+      renderStats();
+      populateDistrictFilter();
+      renderLeadsTable();
+      loadSheetsConfig();
+      showAdminToast(data.message || 'Google Sheets sync complete!', 'success');
+    } else {
+      showAdminToast(data.message || 'Sync failed', 'error');
+    }
+  } catch (err) {
+    showAdminToast('Sync failed: ' + err.message, 'error');
+  }
+}
+
 // Load Dashboard Data & Leads
 async function loadDashboardData() {
   try {
@@ -152,7 +269,6 @@ function renderStats() {
 
   const enrolledCount = allLeads.filter(l => l.status === 'enrolled').length;
   const pendingCount = allLeads.filter(l => l.status === 'new' || l.status === 'in_review').length;
-  const shortlistedCount = allLeads.filter(l => l.status === 'shortlisted').length;
 
   document.getElementById('stat-total-leads').innerText = total;
   document.getElementById('stat-today-leads').innerText = todayCount;
