@@ -328,7 +328,7 @@ function calculateFee(stream) {
   if (stream === 'science') {
     btnSci.className = "py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow-md transition-all";
     btnComm.className = "py-3 px-4 rounded-xl font-bold text-sm bg-emerald-900/80 text-slate-300 hover:text-white border border-emerald-700 transition-all";
-    totalDisplay.innerText = "₹2,30,000";
+    totalDisplay.innerText = "₹2,55,000";
     breakdownText.innerText = "₹15,000 Admission + ₹1.90 Lakh Boarding (20 Mo.) + ₹25,000/yr Science Tuition";
   } else {
     btnComm.className = "py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow-md transition-all";
