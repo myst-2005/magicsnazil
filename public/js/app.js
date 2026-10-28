@@ -333,8 +333,8 @@ function calculateFee(stream) {
   } else {
     btnComm.className = "py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow-md transition-all";
     btnSci.className = "py-3 px-4 rounded-xl font-bold text-sm bg-emerald-900/80 text-slate-300 hover:text-white border border-emerald-700 transition-all";
-    totalDisplay.innerText = "₹2,09,000";
-    breakdownText.innerText = "₹15,000 Admission + ₹1.90 Lakh Boarding (20 Mo.) + ₹2,000/yr Comm/Hum Fee";
+    totalDisplay.innerText = "₹2,45,000";
+    breakdownText.innerText = "₹15,000 Admission + ₹1.90 Lakh Boarding (20 Mo.) + ₹20,000/yr Comm/Hum Fee";
   }
 }
 
