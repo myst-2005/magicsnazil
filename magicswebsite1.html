@@ -1,0 +1,1133 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma'din MAGICS Academy | Junior IAS & Civil Services Training Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            850: '#064e3b',
+                            900: '#022c22',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .emerald-gradient-bg {
+            background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #0f766e 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-emerald-950 text-amber-300 text-xs sm:text-sm font-medium py-2 px-4 text-center border-b border-emerald-800/50 flex items-center justify-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span>Admissions Open for Higher Secondary + Junior IAS Residential Batch (+1 Science, Commerce & Humanities)</span>
+        <a href="#apply" class="underline hover:text-white transition-colors ml-2 font-semibold">Apply Online &rarr;</a>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-800 to-emerald-950 text-amber-400 flex items-center justify-center font-bold text-2xl shadow-md group-hover:scale-105 transition-transform">
+                        M
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="font-heading font-extrabold text-xl text-emerald-950 tracking-tight">MAGICS</span>
+                            <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full border border-amber-200">IAS ACADEMY</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 font-medium tracking-wide">MA'DIN GATE FOR CIVIL SERVICE</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">About Us</a>
+                    <a href="#programs" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">Programs</a>
+                    <a href="#achievements" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">Alumni & Results</a>
+                    <a href="#fees" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">Fee Investment</a>
+                    <a href="#testimonials" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">Testimonials</a>
+                    <a href="#apply" class="text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors">How to Apply</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="tel:7012311040" class="text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 rounded-lg border border-emerald-200 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-phone"></i> 7012311040
+                    </a>
+                    <button onclick="openApplyModal()" class="bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-800 hover:to-emerald-950 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        Apply Now
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-slate-700 hover:text-emerald-700 p-2 text-xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-3 shadow-lg">
+            <a href="#about" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">About Us</a>
+            <a href="#programs" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">Programs</a>
+            <a href="#achievements" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">Alumni & Results</a>
+            <a href="#fees" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">Fee Investment</a>
+            <a href="#testimonials" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">Testimonials</a>
+            <a href="#apply" class="block py-2 text-slate-700 font-semibold text-sm hover:text-emerald-700">How to Apply</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <button onclick="openApplyModal()" class="w-full bg-emerald-800 text-white font-semibold py-2.5 rounded-xl text-center">Apply Now</button>
+                <a href="tel:7012311040" class="w-full text-center py-2 text-sm font-bold text-emerald-800 bg-emerald-50 rounded-xl border border-emerald-200">Call Admissions: 7012311040</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden emerald-gradient-bg text-white py-16 sm:py-24 bg-grid-pattern">
+        <!-- Glow Orbs background -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-40 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide">
+                        <i class="fa-solid fa-award text-amber-400"></i>
+                        <span>PREMIER JUNIOR IAS ACADEMY | MA'DIN ACADEMY</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Empower Your Future: <br class="hidden sm:inline">
+                        <span class="gold-gradient-text">Leadership, Ethics & IAS Prep</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Ma'din MAGICS is an elite residential Junior IAS Coaching Academy designed to nurture future administrators, civil servants, and global leaders through a powerful blend of Higher Secondary (+1 & +2) academics, competitive exam prep, and moral values.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <button onclick="openApplyModal()" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-amber-500/20 transition-all transform hover:-translate-y-0.5 text-base flex items-center justify-center gap-2">
+                            <span>Apply For Admission</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                        <a href="#achievements" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl border border-white/20 transition-all text-base text-center backdrop-blur-sm">
+                            View Alumni Wall
+                        </a>
+                    </div>
+
+                    <!-- Highlight Badges Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-emerald-800/80">
+                        <div class="bg-emerald-900/60 p-3.5 rounded-xl border border-emerald-700/50 text-center">
+                            <div class="text-2xl font-black text-amber-400">7+</div>
+                            <div class="text-xs text-slate-300 font-medium">Golden Years</div>
+                        </div>
+                        <div class="bg-emerald-900/60 p-3.5 rounded-xl border border-emerald-700/50 text-center">
+                            <div class="text-2xl font-black text-amber-400">65+</div>
+                            <div class="text-xs text-slate-300 font-medium">Proven Results</div>
+                        </div>
+                        <div class="bg-emerald-900/60 p-3.5 rounded-xl border border-emerald-700/50 text-center">
+                            <div class="text-2xl font-black text-amber-400">90+</div>
+                            <div class="text-xs text-slate-300 font-medium">Global Alumni</div>
+                        </div>
+                        <div class="bg-emerald-900/60 p-3.5 rounded-xl border border-emerald-700/50 text-center">
+                            <div class="text-2xl font-black text-amber-400">UPSC / PSC</div>
+                            <div class="text-xs text-slate-300 font-medium">Focused Track</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Card Box -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 sm:p-8 text-slate-800 shadow-2xl border border-white/20 relative">
+                        <div class="absolute -top-3 right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                            Admissions 2026-27
+                        </div>
+                        <h3 class="text-2xl font-bold text-emerald-950 mb-2">Integrated Residential Course</h3>
+                        <p class="text-xs text-slate-500 mb-6">Designed for students completing SSLC / 10th Standard</p>
+
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-800">Streams Offered</h4>
+                                    <p class="text-xs text-slate-600">+1 & +2 Science, Commerce & Humanities</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-person-military-to-person"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-800">Competitive Foundation</h4>
+                                    <p class="text-xs text-slate-600">UPSC (Civil Services), Kerala PSC, SSC, CUET-UG</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                                <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-800 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-language"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-slate-800">Language & Life Skills</h4>
+                                    <p class="text-xs text-slate-600">German, Spanish, English, Public Speaking & Sports Coaching</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="openApplyModal()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3.5 rounded-xl shadow transition-all text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Start Online Application</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-100">About MAGICS</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Shaping Tomorrow's Visionary Leaders</h2>
+                <p class="text-slate-600 text-base leading-relaxed">
+                    Operating under the prestigious Ma'din Academy, Ma'din MAGICS is dedicated to identifying promising young minds right after SSLC/10th Grade and grooming them for public governance and high-impact administrative careers.
+                </p>
+            </div>
+
+            <!-- Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Pillar 1 -->
+                <div class="bg-slate-50 hover:bg-emerald-950 hover:text-white p-8 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-emerald-100 group-hover:bg-amber-400 text-emerald-800 group-hover:text-slate-950 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400">Values-Driven Leadership</h3>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-sm leading-relaxed">
+                        We focus on developing morally grounded, socially responsible individuals who combine high intellectual competence with solid integrity to create positive societal change.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-slate-50 hover:bg-emerald-950 hover:text-white p-8 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-amber-100 group-hover:bg-amber-400 text-amber-800 group-hover:text-slate-950 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                        <i class="fa-solid fa-hands-praying"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400">Spiritual Mentorship</h3>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-sm leading-relaxed">
+                        Guided by the spiritual vision and patronage of <strong>Sayyid Ibraheemul Khaleel Al Bukhari (Khaleel Thangal)</strong>, students receive continuous spiritual discipline and moral guidance.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-slate-50 hover:bg-emerald-950 hover:text-white p-8 rounded-2xl border border-slate-100 shadow-sm transition-all duration-300 group">
+                    <div class="w-14 h-14 bg-teal-100 group-hover:bg-amber-400 text-teal-800 group-hover:text-slate-950 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 transition-colors">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 group-hover:text-amber-400">Serene Campus Environment</h3>
+                    <p class="text-slate-600 group-hover:text-slate-300 text-sm leading-relaxed">
+                        Situated in a peaceful, eco-friendly green campus in Malappuram, providing a serene, distraction-free environment for concentrated study and personal development.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROGRAMS & FEATURES -->
+    <section id="programs" class="py-20 bg-slate-50 border-y border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full uppercase tracking-wider">What We Provide</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Comprehensive 4-Pillar Curriculum</h2>
+                <p class="text-slate-600 text-base">A well-structured residential system covering academics, competitive exams, moral sciences, languages, and physical training.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-400 flex items-center justify-center text-xl font-bold shrink-0">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Pillar 01</span>
+                            <h3 class="text-xl font-bold text-slate-900">Integrated Academics & IAS Coaching</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Higher Secondary Stream (+1 & +2):</strong> Science, Commerce, and Humanities streams aligned with board standards.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Civil Services Foundation:</strong> Early intensive coaching for UPSC CSE, Kerala PSC, SSC, and CUET-UG university entrance tests.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-400 flex items-center justify-center text-xl font-bold shrink-0">
+                            <i class="fa-solid fa-kaaba"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Pillar 02</span>
+                            <h3 class="text-xl font-bold text-slate-900">Comprehensive Islamic Studies</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Ethical & Heritage Training:</strong> Deep study of Qur'an, Hadith, Islamic Fiqh, History, and Moral Science.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Harmonious Living:</strong> Training students to bridge high administrative aspirations with ethical integrity and spiritual devotion.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-400 flex items-center justify-center text-xl font-bold shrink-0">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Pillar 03</span>
+                            <h3 class="text-xl font-bold text-slate-900">Foreign Languages & Communication</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Multilingual Training:</strong> Professional instruction in German, Spanish, and advanced English to build international exposure.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Public Speaking & Debate:</strong> Creative writing, literary seminars, mock parliamentary debates, and confidence-building drills.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-4 mb-5">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-800 text-amber-400 flex items-center justify-center text-xl font-bold shrink-0">
+                            <i class="fa-solid fa-futbol"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Pillar 04</span>
+                            <h3 class="text-xl font-bold text-slate-900">Physical Fitness & Mental Wellness</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Sports Academy:</strong> Dedicated football coaching ⚽ and athletic routines for physical endurance.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span><strong>Mental Wellbeing:</strong> Structured recreational routines, outdoor activities, and stress-management mentorship.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ACHIEVEMENTS & ALUMNI WALL -->
+    <section id="achievements" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full uppercase tracking-wider border border-amber-400/20">Our Alumni Are Our Superheroes</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-3 mb-4">Hall of Distinction & Results</h2>
+                <p class="text-slate-400 text-base">Over 65+ proven national competitive results and alumni shaping premier institutions worldwide.</p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="text-3xl font-black text-amber-400">6+</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">UPSC Attempts/Mains</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="text-3xl font-black text-amber-400">15+</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Police & Defense Officers</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="text-3xl font-black text-amber-400">97%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Top Board Exam Score</div>
+                </div>
+                <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700 text-center">
+                    <div class="text-3xl font-black text-amber-400">₹20 Lakhs</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Max Scholarship Bagged</div>
+                </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" id="alumni-filter-container">
+                <button onclick="filterAlumni('all')" class="filter-btn active bg-amber-400 text-slate-950 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all">All Records</button>
+                <button onclick="filterAlumni('upsc')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition-all">UPSC Aspirants</button>
+                <button onclick="filterAlumni('police')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition-all">Police & Defense (PSC)</button>
+                <button onclick="filterAlumni('uni')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition-all">Top Universities (IIT/NIT/AMU/DU)</button>
+                <button onclick="filterAlumni('olympiad')" class="filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition-all">Olympiad & Int'l</button>
+            </div>
+
+            <!-- Alumni Grid Container -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="alumni-grid">
+                
+                <!-- Card 1: UPSC -->
+                <div class="alumni-card upsc bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-400/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded uppercase">UPSC CSE</span>
+                            <h4 class="text-base font-bold text-white">Muhammed Muhassin</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-amber-300 font-semibold mb-2">UPSC Interview CSE 2023</p>
+                    <p class="text-[11px] text-slate-400">Present Post: Dy. District Education & Media Officer, Kozhikode Medical Office.</p>
+                </div>
+
+                <!-- Card 2: UPSC -->
+                <div class="alumni-card upsc bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-400/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded uppercase">UPSC CSE</span>
+                            <h4 class="text-base font-bold text-white">Shirfad Hussain</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-amber-300 font-semibold mb-2">UPSC Interview CSE 2021</p>
+                    <p class="text-[11px] text-slate-400">Civil Services Mains & Interview Qualifier.</p>
+                </div>
+
+                <!-- Card 3: Police/SI -->
+                <div class="alumni-card police bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-400/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded uppercase">Kerala Police</span>
+                            <h4 class="text-base font-bold text-white">Arshid K.M</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-300 font-semibold mb-2">Sub Inspector of Police</p>
+                    <p class="text-[11px] text-slate-400">Passed out from Kerala Police Academy (2023 Alumni Batch).</p>
+                </div>
+
+                <!-- Card 4: Police/SI -->
+                <div class="alumni-card police bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-400/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded uppercase">Armed Force</span>
+                            <h4 class="text-base font-bold text-white">Salahudheen</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-300 font-semibold mb-2">Armed Force Sub Inspector</p>
+                    <p class="text-[11px] text-slate-400">Police Training College (2023 Alumni Batch).</p>
+                </div>
+
+                <!-- Card 5: IIT Madras -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-400/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded uppercase">IIT Madras</span>
+                            <h4 class="text-base font-bold text-white">Muhammed Ameen</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-blue-300 font-semibold mb-2">Data Science & Application</p>
+                    <p class="text-[11px] text-slate-400">Secured admission at Indian Institute of Technology (IIT) Madras.</p>
+                </div>
+
+                <!-- Card 6: Turkey Government Scholarship -->
+                <div class="alumni-card olympiad bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-rose-400/20 text-rose-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-rose-400 bg-rose-400/10 px-2 py-0.5 rounded uppercase">Global Scholarship</span>
+                            <h4 class="text-base font-bold text-white">Muhammed Swalih K</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-rose-300 font-semibold mb-2">Türkiye Bursları Scholarship</p>
+                    <p class="text-[11px] text-slate-400">100% Free Tuition, Stay, Food, Flight & Monthly Stipend at Necmettin Erbakan Univ, Turkey.</p>
+                </div>
+
+                <!-- Card 7: NIT Calicut -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-cyan-400/20 text-cyan-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-atom"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded uppercase">NIT Calicut</span>
+                            <h4 class="text-base font-bold text-white">Afsal T.K</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-cyan-300 font-semibold mb-2">Rank 81 - B.Sc Physics</p>
+                    <p class="text-[11px] text-slate-400">Selection at National Institute of Technology (NIT) Calicut.</p>
+                </div>
+
+                <!-- Card 8: Olympiad Qualifiers -->
+                <div class="alumni-card olympiad bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-400/20 text-amber-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded uppercase">Maths Olympiad</span>
+                            <h4 class="text-base font-bold text-white">Salim, Ashmil, Hadhi</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-amber-300 font-semibold mb-2">IOQM 2026 -> RMO 2026 Qualified</p>
+                    <p class="text-[11px] text-slate-400">Qualified Indian Olympiad Qualifier in Mathematics for RMO 2026 stage.</p>
+                </div>
+
+                <!-- Card 9: AMU Physics -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-400/20 text-blue-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded uppercase">AMU Aligarh</span>
+                            <h4 class="text-base font-bold text-white">Nasim P</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-blue-300 font-semibold mb-2">B.Sc Physics at AMU</p>
+                    <p class="text-[11px] text-slate-400">Secured seat at Aligarh Muslim University among Top 10 Indian universities.</p>
+                </div>
+
+                <!-- Card 10: DU BCom -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-400/20 text-purple-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded uppercase">Delhi University</span>
+                            <h4 class="text-base font-bold text-white">Mohammed Unais</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-purple-300 font-semibold mb-2">97% in +2 Board (1165/1200)</p>
+                    <p class="text-[11px] text-slate-400">From 76% in SSLC to 97% in +2 Commerce & admission to DU B.Com.</p>
+                </div>
+
+                <!-- Card 11: Azim Premji Scholarship -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-400/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded uppercase">₹20 Lakh Scholarship</span>
+                            <h4 class="text-base font-bold text-white">Danish Rahman</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-300 font-semibold mb-2">Azim Premji University</p>
+                    <p class="text-[11px] text-slate-400">90% in +2 Science & secured Humanities degree with ₹20L scholarship.</p>
+                </div>
+
+                <!-- Card 12: LPU Scholarship -->
+                <div class="alumni-card uni bg-slate-800/90 rounded-2xl p-5 border border-slate-700 hover:border-amber-400/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-teal-400/20 text-teal-400 flex items-center justify-center font-bold text-sm">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-teal-400 bg-teal-400/10 px-2 py-0.5 rounded uppercase">LPU Punjab</span>
+                            <h4 class="text-base font-bold text-white">Muhammed Famis</h4>
+                        </div>
+                    </div>
+                    <p class="text-xs text-teal-300 font-semibold mb-2">M.A. Clinical Psychology</p>
+                    <p class="text-[11px] text-slate-400">Secured admission at Lovely Professional Univ with ₹1.10 Lakh scholarship.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEE STRUCTURE & CALCULATOR -->
+    <section id="fees" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-100">Transparent Pricing</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Fee Investment Structure</h2>
+                <p class="text-slate-600 text-base">Clear breakdown of our 2-Year Residential Higher Secondary + Civil Services Program.</p>
+            </div>
+
+            <!-- Fee Breakdown Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
+                
+                <!-- Table Details Left -->
+                <div class="lg:col-span-7 bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200/80">
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-emerald-700"></i>
+                        <span>Core Base Fee Schedule</span>
+                    </h3>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-600">
+                            <thead class="bg-emerald-950 text-white text-xs uppercase font-semibold">
+                                <tr>
+                                    <th class="p-3.5 rounded-l-lg">Fee Component</th>
+                                    <th class="p-3.5">Amount</th>
+                                    <th class="p-3.5 rounded-r-lg">Coverage & Inclusions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200">
+                                <tr>
+                                    <td class="p-3.5 font-bold text-slate-800">One-Time Admission Fee</td>
+                                    <td class="p-3.5 font-bold text-emerald-700">₹15,000</td>
+                                    <td class="p-3.5 text-xs">One-time enrollment and registration fee upon admission.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-bold text-slate-800">Monthly Residential Fee</td>
+                                    <td class="p-3.5 font-bold text-emerald-700">₹9,500 <span class="text-[10px] text-slate-500 font-normal">/ month</span></td>
+                                    <td class="p-3.5 text-xs">
+                                        Includes Boarding & Mess, Civil Services Coaching, German/Foreign Language Training, Football Coaching ⚽, Islamic Classes & Hostel Activities.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-bold text-slate-800">Science Stream School Fee</td>
+                                    <td class="p-3.5 font-bold text-slate-800">₹25,000 <span class="text-[10px] text-slate-500 font-normal">/ year</span></td>
+                                    <td class="p-3.5 text-xs">Optional school tuition fee for Higher Secondary Science.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-bold text-slate-800">Commerce / Humanities Fee</td>
+                                    <td class="p-3.5 font-bold text-slate-800">₹2,000 <span class="text-[10px] text-slate-500 font-normal">/ year</span></td>
+                                    <td class="p-3.5 text-xs">Optional school tuition fee for Commerce & Humanities.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-4 text-xs text-slate-500 bg-amber-50 p-3 rounded-lg border border-amber-200 flex items-start gap-2">
+                        <i class="fa-solid fa-circle-info text-amber-600 mt-0.5"></i>
+                        <span>* School fees exclude official board exam fees, registration, and uniform expenses.</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Stream Fee Calculator Right -->
+                <div class="lg:col-span-5 bg-emerald-950 text-white p-6 sm:p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-800/30 rounded-full blur-2xl"></div>
+
+                    <span class="text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full uppercase tracking-wider">Interactive Fee Calculator</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-4">Total 2-Year Program Cost</h3>
+                    <p class="text-xs text-slate-300 mb-6">Select your intended Higher Secondary Stream to view the total 2-Year estimated cost (including 20 months of boarding & coaching):</p>
+
+                    <!-- Stream Selector Buttons -->
+                    <div class="grid grid-cols-2 gap-3 mb-6">
+                        <button id="btn-calc-science" onclick="calculateFee('science')" class="py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow transition-all">
+                            Science Stream
+                        </button>
+                        <button id="btn-calc-comm" onclick="calculateFee('comm')" class="py-3 px-4 rounded-xl font-bold text-sm bg-emerald-900 text-slate-300 hover:text-white border border-emerald-700 transition-all">
+                            Commerce / Humanities
+                        </button>
+                    </div>
+
+                    <!-- Result Box -->
+                    <div class="bg-emerald-900/80 rounded-xl p-5 border border-emerald-700 text-center mb-6">
+                        <div class="text-xs text-slate-300 uppercase tracking-wide">Total Estimated 2-Year Cost</div>
+                        <div class="text-4xl font-extrabold text-amber-400 my-2" id="calc-total-display">₹2,30,000</div>
+                        <div class="text-[11px] text-slate-300" id="calc-breakdown-text">
+                            ₹15k Admission + ₹1.90L Boarding (20 Mo.) + ₹25k/yr School Fee
+                        </div>
+                    </div>
+
+                    <button onclick="openApplyModal()" class="w-full bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2">
+                        <span>Lock Seat & Apply Now</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS (VOICES OF TRUST) -->
+    <section id="testimonials" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full uppercase tracking-wider">Voices of Trust</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">Real Stories, Real Impact</h2>
+                <p class="text-slate-600 text-base">Hear from parents and alumni about the transformation experienced at MAGICS.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Parent Pulse Card -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-extrabold text-amber-700 bg-amber-100 px-3 py-1 rounded-full uppercase">The Parent Pulse</span>
+                            <i class="fa-solid fa-quote-right text-3xl text-slate-200"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">"A Holistic Environment Nurturing Growth & Ethics"</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                            "I observe my son's progress after joining MAGICS with immense pride. The continuous support and care from mentors, along with necessary entertainment and constant motivational sessions, help us closely track our children's standards. In today's social scenario, moral education is an absolute necessity alongside secular academics. Seeing contemporary peers stray into wrong paths, I often reflect on how right a decision it was to enroll my son here."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-bold flex items-center justify-center">
+                            SE
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-slate-900">Subaida E.</div>
+                            <div class="text-xs text-slate-500">Mother of Ishan (+2 Student)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Speaks Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full uppercase">Echoes of Excellence</span>
+                            <i class="fa-solid fa-quote-right text-3xl text-slate-200"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">"From 76% in 10th to Delhi University B.Com"</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                            "I joined MAGICS with 76% in 10th standard and was uncertain about securing top higher education. Alhamdulillah, thanks to the continuous motivation, academic rigor, and mentorship at MAGICS, I achieved 97% in Plus Two Commerce and earned admission for B.Com higher studies at Delhi University!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-bold flex items-center justify-center">
+                            UK
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-slate-900">Mohammed Unais K.A</div>
+                            <div class="text-xs text-slate-500">Karnataka (2024 Batch)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Speaks Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full uppercase">Echoes of Excellence</span>
+                            <i class="fa-solid fa-quote-right text-3xl text-slate-200"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">"90% in +2 & ₹20 Lakh Scholarship"</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                            "Balancing Science in +2 while preparing for degree entrance in Humanities was a huge challenge. With the guidance of team MAGICS, I scored 90% in Plus Two Science and secured admission for Humanities at Azim Premji University along with a ₹20 Lakh educational scholarship!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-bold flex items-center justify-center">
+                            DR
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-slate-900">Danish Rahman</div>
+                            <div class="text-xs text-slate-500">2024 Batch Alumni</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alumni Speaks Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full uppercase">Echoes of Excellence</span>
+                            <i class="fa-solid fa-quote-right text-3xl text-slate-200"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">"Fulfilling the Dream of Studying at AMU"</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed italic mb-6">
+                            "It was through MAGICS that I first learned about Aligarh Muslim University (AMU). Until joining MAGICS, getting into AMU felt like an unattainable dream. Despite tough competition, I secured a B.Sc Physics seat at AMU. I am deeply indebted to MAGICS for giving wings to my aspirations!"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                        <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-bold flex items-center justify-center">
+                            NP
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-slate-900">Nasim P</div>
+                            <div class="text-xs text-slate-500">Cherpulassery (2024 Batch)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HOW TO APPLY -->
+    <section id="apply" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-100">Easy Online Application</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 mb-4">How to Apply for Admission</h2>
+                <p class="text-slate-600 text-base">Follow these 5 simple steps to complete your registration via the Ma'din Family App.</p>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+                
+                <!-- Step 1 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-center relative group hover:bg-emerald-950 hover:text-white transition-all">
+                    <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-extrabold flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">1</div>
+                    <h3 class="text-sm font-bold mb-2">Download App</h3>
+                    <p class="text-xs text-slate-600 group-hover:text-slate-300">Download the <strong>Ma'din Family App</strong> from Google Play Store.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-center relative group hover:bg-emerald-950 hover:text-white transition-all">
+                    <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-extrabold flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">2</div>
+                    <h3 class="text-sm font-bold mb-2">Tap 'Admission'</h3>
+                    <p class="text-xs text-slate-600 group-hover:text-slate-300">Open the app dashboard and select the 'Admission' icon.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-center relative group hover:bg-emerald-950 hover:text-white transition-all">
+                    <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-extrabold flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">3</div>
+                    <h3 class="text-sm font-bold mb-2">Select MAGICS</h3>
+                    <p class="text-xs text-slate-600 group-hover:text-slate-300">Choose 'Admission Open ▶️ Ma'din MAGICS'.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-center relative group hover:bg-emerald-950 hover:text-white transition-all">
+                    <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-extrabold flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">4</div>
+                    <h3 class="text-sm font-bold mb-2">Fill & Pay Fee</h3>
+                    <p class="text-xs text-slate-600 group-hover:text-slate-300">Enter personal, academic details and make online payment.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200/80 text-center relative group hover:bg-emerald-950 hover:text-white transition-all">
+                    <div class="w-10 h-10 rounded-full bg-emerald-800 text-amber-400 font-extrabold flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-400 group-hover:text-slate-950 transition-colors">5</div>
+                    <h3 class="text-sm font-bold mb-2">Save PDF</h3>
+                    <p class="text-xs text-slate-600 group-hover:text-slate-300">Submit form and download confirmation PDF slip.</p>
+                </div>
+
+            </div>
+
+            <!-- Download CTA Box -->
+            <div class="mt-12 bg-gradient-to-r from-emerald-900 to-emerald-950 text-white rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center text-3xl font-extrabold shrink-0">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Download Ma'din Family App</h3>
+                        <p class="text-xs text-slate-300 mt-1">Available on Google Play Store for easy mobile admissions.</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="https://play.google.com/store/apps/details?id=com.madin.familyapp" target="_blank" class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-3 rounded-xl text-sm transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-google-play"></i>
+                        <span>Get on Play Store</span>
+                    </a>
+                    <button onclick="openApplyModal()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 text-sm transition-all">
+                        Web Quick Register
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1 -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-xl">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-800 text-amber-400 flex items-center justify-center text-lg">M</div>
+                        <span>Ma'din MAGICS</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Junior IAS Coaching & Residential Higher Secondary Academy under Ma'din Academy, Edupark, Malappuram.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://www.instagram.com/magicsias" target="_blank" class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-amber-400 hover:bg-emerald-800 transition-colors">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://whatsapp.com/channel/0029Vb6u9jiAu3aXOJ54kP0v" target="_blank" class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 hover:bg-emerald-800 transition-colors">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+               <!-- Col 2 -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#about" class="hover:text-amber-400 transition-colors">About Academy</a></li>
+                        <li><a href="#programs" class="hover:text-amber-400 transition-colors">Academic Streams</a></li>
+                        <li><a href="#achievements" class="hover:text-amber-400 transition-colors">Alumni & UPSC Results</a></li>
+                        <li><a href="#fees" class="hover:text-amber-400 transition-colors">Fee Calculator</a></li>
+                        <li><a href="#apply" class="hover:text-amber-400 transition-colors">How to Apply</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Streams & Training</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><span>+1 & +2 Higher Secondary</span></li>
+                        <li><span>UPSC Civil Services Foundation</span></li>
+                        <li><span>Kerala PSC & SSC Prep</span></li>
+                        <li><span>German & Foreign Languages</span></li>
+                        <li><span>Islamic Studies & Ethics</span></li>
+                        <li><span>Football Coaching Academy</span></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 -->
+                <div>
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Contact Admissions</h4>
+                    <div class="space-y-3 text-xs">
+                        <div class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-phone text-amber-400 mt-0.5"></i>
+                            <div>
+                                <a href="tel:7012311040" class="hover:text-white block">7012311040</a>
+                                <a href="tel:8136809140" class="hover:text-white block">8136809140</a>
+                                <a href="tel:9656767110" class="hover:text-white block">9656767110</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-amber-400"></i>
+                            <a href="mailto:magics@madin.edu.in" class="hover:text-white">magics@madin.edu.in</a>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-amber-400 mt-0.5"></i>
+                            <span>Ma'din Edupark, Melmuri PO, Malappuram, Kerala - 676517</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>&copy; 2026 Ma'din MAGICS Academy. All rights reserved.</p>
+                <p>Designed for Excellence in Leadership & Governance.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- APPLICATION MODAL -->
+    <div id="apply-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 my-8">
+            <button onclick="closeApplyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full uppercase">Admission Enquiry</span>
+                <h3 class="text-2xl font-bold text-slate-900 mt-2">Apply for Ma'din MAGICS</h3>
+                <p class="text-xs text-slate-500">Fill in your basic details for early seat registration & prospectus.</p>
+            </div>
+
+            <form id="admissionForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Student's Full Name *</label>
+                    <input type="text" required placeholder="Enter student name" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Parent's Mobile *</label>
+                        <input type="tel" required placeholder="Phone number" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">District / State *</label>
+                        <input type="text" required placeholder="e.g. Malappuram" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Preferred Stream *</label>
+                    <select required class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700 bg-white">
+                        <option value="">Select Higher Secondary Stream</option>
+                        <option value="science">+1 Science Stream</option>
+                        <option value="commerce">+1 Commerce Stream</option>
+                        <option value="humanities">+1 Humanities Stream</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">SSLC / 10th Score (%)</label>
+                    <input type="text" placeholder="e.g. 95% or Full A+" class="w-full text-sm px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700">
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-3 rounded-xl transition-all text-sm shadow">
+                    Submit Registration Form
+                </button>
+            </form>
+
+            <div id="formSuccessMessage" class="hidden text-center py-6 space-y-3">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-lg font-bold text-slate-900">Application Submitted!</h4>
+                <p class="text-xs text-slate-600">Our admission desk will get in touch with you shortly. You can also download the Ma'din Family App to finalize full online payment.</p>
+                <button onclick="closeApplyModal()" class="text-xs font-bold text-emerald-800 underline">Close Window</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile menu toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Application Modal functions
+        function openApplyModal() {
+            document.getElementById('apply-modal').classList.remove('hidden');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+            document.getElementById('admissionForm').classList.remove('hidden');
+            document.getElementById('formSuccessMessage').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('admissionForm').classList.add('hidden');
+            document.getElementById('formSuccessMessage').classList.remove('hidden');
+        }
+
+        // Fee Calculator Logic
+        function calculateFee(stream) {
+            const btnSci = document.getElementById('btn-calc-science');
+            const btnComm = document.getElementById('btn-calc-comm');
+            const totalDisplay = document.getElementById('calc-total-display');
+            const breakdownText = document.getElementById('calc-breakdown-text');
+
+            if (stream === 'science') {
+                btnSci.className = "py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow transition-all";
+                btnComm.className = "py-3 px-4 rounded-xl font-bold text-sm bg-emerald-900 text-slate-300 hover:text-white border border-emerald-700 transition-all";
+                totalDisplay.innerText = "₹2,30,000";
+                breakdownText.innerText = "₹15k Admission + ₹1.90L Boarding (20 Mo.) + ₹25k/yr Science Fee";
+            } else {
+                btnComm.className = "py-3 px-4 rounded-xl font-bold text-sm bg-amber-400 text-slate-950 shadow transition-all";
+                btnSci.className = "py-3 px-4 rounded-xl font-bold text-sm bg-emerald-900 text-slate-300 hover:text-white border border-emerald-700 transition-all";
+                totalDisplay.innerText = "₹2,25,000";
+                breakdownText.innerText = "₹15k Admission + ₹1.90L Boarding (20 Mo.) + ₹2k/yr Comm/Hum Fee";
+            }
+        }
+
+        // Alumni Filter Logic
+        function filterAlumni(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.className = "filter-btn bg-slate-800 text-slate-300 hover:bg-slate-700 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold border border-slate-700 transition-all";
+            });
+
+            // Highlight active button
+            event.currentTarget.className = "filter-btn active bg-amber-400 text-slate-950 px-5 py-2 rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all";
+
+            const cards = document.querySelectorAll('.alumni-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = "block";
+                } else {
+                    if (card.classList.contains(category)) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+```
