@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const sheetsService = require('./googleSheetsService');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -95,11 +96,93 @@ app.get('/api/auth/verify', (req, res) => {
   return res.status(401).json({ valid: false });
 });
 
-// Get all leads with optional filtering
-app.get('/api/leads', (req, res) => {
-  const leads = readLeads();
-  const { search, stream, status, district } = req.query;
+// Google Sheets Configuration Endpoints
+app.get('/api/config/sheets', (req, res) => {
+  res.json({ success: true, config: sheetsService.getConfig() });
+});
 
+app.post('/api/config/sheets', async (req, res) => {
+  const { webAppUrl } = req.body;
+  const updatedConfig = sheetsService.setConfig({ webAppUrl: webAppUrl ? webAppUrl.trim() : '' });
+
+  if (updatedConfig.webAppUrl) {
+    const testResult = await sheetsService.testConnection(updatedConfig.webAppUrl);
+    sheetsService.setConfig({ isConnected: testResult.success });
+    return res.json({
+      success: testResult.success,
+      config: sheetsService.getConfig(),
+      message: testResult.message
+    });
+  }
+
+  res.json({ success: true, config: updatedConfig, message: 'Google Sheets configuration updated.' });
+});
+
+// Manual Sync Endpoint between Google Sheet and local database
+app.post('/api/leads/sync', async (req, res) => {
+  try {
+    const localLeads = readLeads();
+    const remoteLeads = await sheetsService.fetchLeadsFromSheet();
+
+    if (!remoteLeads) {
+      return res.status(400).json({
+        success: false,
+        message: 'Could not fetch leads from Google Sheet. Please check your Web App URL and permissions.'
+      });
+    }
+
+    // Merge strategy: Combine remote and local, keeping unique leads by ID
+    const leadMap = new Map();
+    localLeads.forEach(l => leadMap.set(l.id, l));
+    remoteLeads.forEach(l => {
+      if (l.id) {
+        leadMap.set(l.id, { ...leadMap.get(l.id), ...l });
+      }
+    });
+
+    const mergedLeads = Array.from(leadMap.values());
+    mergedLeads.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    writeLeads(mergedLeads);
+
+    // Push local leads missing in Google Sheet back to Google Sheet
+    const remoteIds = new Set(remoteLeads.map(l => l.id));
+    const leadsToPush = localLeads.filter(l => !remoteIds.has(l.id));
+    for (const lead of leadsToPush) {
+      await sheetsService.addLeadToSheet(lead);
+    }
+
+    res.json({
+      success: true,
+      message: `Sync complete! Combined ${mergedLeads.length} total leads.`,
+      count: mergedLeads.length,
+      leads: mergedLeads
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Sync failed: ' + err.message });
+  }
+});
+
+// Get all leads with optional filtering
+app.get('/api/leads', async (req, res) => {
+  let leads = readLeads();
+
+  // Optionally fetch fresh data from Google Sheets if configured
+  try {
+    const sheetLeads = await sheetsService.fetchLeadsFromSheet();
+    if (sheetLeads && sheetLeads.length > 0) {
+      const leadMap = new Map();
+      leads.forEach(l => leadMap.set(l.id, l));
+      sheetLeads.forEach(l => {
+        if (l.id) leadMap.set(l.id, { ...leadMap.get(l.id), ...l });
+      });
+      leads = Array.from(leadMap.values());
+      writeLeads(leads);
+    }
+  } catch (err) {
+    console.warn('Google Sheets fetch warning, using local database fallback:', err.message);
+  }
+
+  const { search, stream, status, district } = req.query;
   let filtered = leads;
 
   if (stream && stream !== 'all') {
@@ -132,7 +215,7 @@ app.get('/api/leads', (req, res) => {
 });
 
 // Add new lead (from public website form or admin offline lead)
-app.post('/api/leads', (req, res) => {
+app.post('/api/leads', async (req, res) => {
   const {
     fullName,
     parentName,
@@ -185,6 +268,11 @@ app.post('/api/leads', (req, res) => {
   leads.unshift(newLead);
   writeLeads(leads);
 
+  // Sync to Google Sheet asynchronously
+  sheetsService.addLeadToSheet(newLead).catch(err => {
+    console.error('Async Google Sheet sync error on addLead:', err.message);
+  });
+
   res.status(201).json({
     success: true,
     message: 'Application submitted successfully!',
@@ -193,7 +281,7 @@ app.post('/api/leads', (req, res) => {
 });
 
 // Update lead status or counsellor notes
-app.patch('/api/leads/:id', (req, res) => {
+app.patch('/api/leads/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   const leads = readLeads();
@@ -210,11 +298,17 @@ app.patch('/api/leads/:id', (req, res) => {
   };
 
   writeLeads(leads);
+
+  // Sync update to Google Sheet
+  sheetsService.updateLeadInSheet(id, updates).catch(err => {
+    console.error('Async Google Sheet sync error on updateLead:', err.message);
+  });
+
   res.json({ success: true, message: 'Lead updated successfully', lead: leads[index] });
 });
 
 // Delete lead
-app.delete('/api/leads/:id', (req, res) => {
+app.delete('/api/leads/:id', async (req, res) => {
   const { id } = req.params;
   const leads = readLeads();
   const filtered = leads.filter(l => l.id !== id);
@@ -224,6 +318,12 @@ app.delete('/api/leads/:id', (req, res) => {
   }
 
   writeLeads(filtered);
+
+  // Sync deletion to Google Sheet
+  sheetsService.deleteLeadFromSheet(id).catch(err => {
+    console.error('Async Google Sheet sync error on deleteLead:', err.message);
+  });
+
   res.json({ success: true, message: 'Lead deleted successfully' });
 });
 
@@ -347,6 +447,12 @@ app.post('/api/leads/reset', (req, res) => {
   ];
 
   writeLeads(demoLeads);
+
+  // Sync reset to Google Sheet
+  demoLeads.forEach(lead => {
+    sheetsService.addLeadToSheet(lead).catch(() => {});
+  });
+
   res.json({ success: true, message: 'Leads reset to demo data', leads: demoLeads });
 });
 
